@@ -3,18 +3,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import {Link} from 'react-router-dom'
-
+import { useHistory } from "react-router-dom";
 
 import DisabledButton from "./DisableButton";
 import { updateExpAction } from "../redux/slices/expenses/expenseStatSlice";
 import {  updateIncomeAction } from "../redux/slices/income/incomeSlices";
-
-//form validations
-const formSchema = Yup.object({
-  title: Yup.string().required("title is required"),
-  description: Yup.string().required("description: is required"),
-  amount: Yup.number().required("Amount is required"),
-});
 
 const EditContent = ({
   location: {
@@ -28,8 +21,9 @@ const EditContent = ({
   const formik = useFormik({
     initialValues: {
       title: item?.title,
-      description: item?.description,
+      note: item?.note,
       amount: item?.amount,
+      date:item?.date,
     },
     onSubmit: values => {
       const data = {
@@ -40,22 +34,20 @@ const EditContent = ({
         ? dispatch(updateIncomeAction(data))
         : dispatch(updateExpAction(data));
     },
-    validationSchema: formSchema,
   });
 
   //get data form store
-  // const history = useHistory();
+  const history = useHistory();
   const expenseData = useSelector(state => state.expenses);
   const { appErr, serverErr, expenseUpdated, loading } = expenseData;
 
   return (
-    <section className="py-5 bg-secondary vh-100">
+    <section className="pal-6 bg-secondary ">
       <div className="container text-center">
         <div className="row mb-4">
           <div className="col-12 col-md-8 col-lg-5 mx-auto">
             <div className="p-4 shadow-sm rounded bg-white">
               <form onSubmit={formik.handleSubmit}>
-                <span className="text-muted"></span>
                 {/* Display Err */}
                 {appErr || serverErr ? <div>Err</div> : null}
                 {item?.type === "income" ? (
@@ -63,7 +55,8 @@ const EditContent = ({
                 ) : (
                   <h2>Update Expense</h2>
                 )}
-                <div className="mb-3 input-group">
+                
+                <div className="mb-4 mt-4 input-group">
                   <input
                     value={formik.values.title}
                     onChange={formik.handleChange("title")}
@@ -73,25 +66,17 @@ const EditContent = ({
                     placeholder="Enter Title"
                   />
                 </div>
-                {/* Err */}
-                <div className="text-danger mb-2">
-                  {formik.touched.title && formik.errors.title}
-                </div>
-                <div className="mb-3 input-group">
+                <div className="mb-4 input-group">
                   <input
-                    value={formik.values.description}
-                    onChange={formik.handleChange("description")}
-                    onBlur={formik.handleBlur("description")}
+                    value={formik.values.note}
+                    onChange={formik.handleChange("note")}
+                    onBlur={formik.handleBlur("note")}
                     className="form-control"
                     type="text"
-                    placeholder="Enter Description"
+                    placeholder="Enternote"
                   />
                 </div>
-                {/* Err */}
-                <div className="text-danger mb-2">
-                  {formik.touched.description && formik.errors.description}
-                </div>
-                <div className="mb-3 input-group">
+                <div className="mb-4 input-group">
                   <input
                     value={formik.values.amount}
                     onChange={formik.handleChange("amount")}
@@ -101,16 +86,25 @@ const EditContent = ({
                     placeholder="Enter Amount"
                   />
                 </div>
-                {/* Err */}
-                <div className="text-danger mb-2">
-                  {formik.touched.amount && formik.errors.amount}
-                </div>
+                <div className="mb-4 input-group">
+                <input
+                  value={formik.values.date}
+                  onChange={formik.handleChange("date")}
+                  onBlur={formik.handleBlur("date")}
+                  className="form-control"
+                  type="date"
+                />
+              </div>
                 {loading ? (
-                  <DisabledButton />
-                ) : (
+                  <DisabledButton /> 
+                ) : ( 
                   <button type="submit" className="btn btn-primary w-100"> 
-                  update 
-                  </button>
+                    {item?.type === "income" ? (
+                  <h5   onClick={() => history.push("/user-income")} >Update Income</h5>
+                ) : (
+                  <h5  onClick={() => history.push("/user-expenses")}>Update Expense</h5>
+                )}
+                  </button> 
                 )}
               </form>
             </div>

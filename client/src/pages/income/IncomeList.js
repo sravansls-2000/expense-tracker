@@ -28,66 +28,66 @@ const IncomeList = () => {
           {serverErr} {appErr}
         </ErrorDisplayMessage>
       ) : (
-        <section >
-           <div class="limiter">
-  	<div class="container-table100">
-    <h3>RECENT INCOME DETAILS OF USER</h3>
-    <div class="wrap-table100"> 
-             
-               
-              
-              <table className="table">
-                <thead>
-                  <tr className="table-active">
-                    <th scope="col">
-                      <button className="btn d-flex align-items-centerr text-uppercase">
-                        <small>Withdrawed By</small>
-                      </button>
-                    </th>
-                    <th scope="col">
-                      <button className="btn d-flex align-items-centerr text-uppercase">
-                        <small>Title</small>
-                      </button>
-                    </th>
-                    <th scope="col">
-                      <button className="btn d-flex align-items-centerr text-uppercase">
-                        <small>Description</small>
-                      </button>
-                    </th>
-                    <th scope="col">
-                      <button className="btn d-flex align-items-centerr text-uppercase">
-                        <small>Amount</small>
-                      </button>
-                    </th>
-                    <th scope="col">
-                      <button className="btn d-flex align-items-centerr text-uppercase">
-                        <small>Date</small>
-                      </button>
-                    </th>
-                   
-                  </tr>
-                </thead>
-                <tbody>
-                  {loading ? (
-                    <h1>Loading...</h1>
-                  ) : appErr || serverErr ? (
-                    <div>err</div>
-                  ) : incomeList?.docs?.length <= 0 ? (
-                    <h1>NO INCOME FOUND</h1>
-                  ) : (
-                    console.log(incomeList),
-                    incomeList?.docs?.map(exp => (
-                      <>
-                        <ContentDetails key={exp?._id} item={exp} />
-                      </>
-                    ))
-                  )}
-                </tbody>
-              </table>
-            </div>
+        <div className="pal-3 bg-light">
+          <div className="container-fluid ">
+            <div className="border border-0">
+              <h6 className="kal  fs-2 text-secondary ">
+                Recent Income transactions
+              </h6>
+              <div className="tt">
+                <table className="table table-striped ">
+                  <thead>
+                    <tr>
+                      <th scope="col">
+                        <strong className="btn  text-uppercase fw-bold text-light">
+                          Username
+                        </strong>
+                      </th>
+                      <th scope="col">
+                        <strong className="btn  text-uppercase fw-bold text-light">
+                          Title
+                        </strong>
+                      </th>
+                      <th scope="col">
+                        <strong className="btn  text-uppercase fw-bold text-light">
+                          Note
+                        </strong>
+                      </th>
+                      <th scope="col">
+                        <strong className="btn  text-uppercase fw-bold text-light">
+                          Amount
+                        </strong>
+                      </th>
+                      <th scope="col">
+                        <strong className="btn  text-uppercase fw-bold text-light">
+                          Date
+                        </strong>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {loading ? (
+                      <h1>Loading...</h1>
+                    ) : appErr || serverErr ? (
+                      <div>err</div>
+                    ) : incomeList?.docs?.length <= 0 ? (
+                      <h4 className="m-5" style={{ "font-size": "25px" }}>
+                        No Income Found
+                      </h4>
+                    ) : (
+                      incomeList?.docs?.map((exp) => (
+                        <>
+                          <ContentDetails key={exp?._id} item={exp} />
+                        </>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
           <div
+            className="pl"
             style={{
               display: "flex",
               alignItems: "center",
@@ -100,8 +100,7 @@ const IncomeList = () => {
               pageNumber={incomeList?.totalPages}
             />
           </div>
-          
-        </section>
+        </div>
       )}
     </>
   );

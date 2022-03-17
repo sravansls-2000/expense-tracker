@@ -6,8 +6,7 @@ import ContentDetails from "../../components/ContentDetails";
 import ErrorDisplayMessage from "../../components/ErrorDisplayMessage";
 import LoadingComponent from "../../components/Loading";
 import { fetchAllExpAction } from "../../redux/slices/expenses/expenseStatSlice";
-import '../users/css/table.css'
-
+import '../../App.css';
 const ExpensesList = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
@@ -27,63 +26,65 @@ const ExpensesList = () => {
           {serverErr} {appErr}
         </ErrorDisplayMessage>
       ) : (
-        <section>
-             <div class="limiter">
-  	<div class="container-table100">
-    <h3>RECENT EXPENSE DETAILS OF USER</h3>
-    <div class="wrap-table100"> 
-             
-              <table className="table">
-                <thead>
-                  <tr className="table-active">
-                    <th scope="col">
-                      <button className="btn d-flex align-items-centerr text-uppercase">
-                        <small>Withdrawed By</small>
-                      </button>
-                    </th>
-                    <th scope="col">
-                      <button className="btn d-flex align-items-centerr text-uppercase">
-                        <small>Title</small>
-                      </button>
-                    </th>
-                    <th scope="col">
-                      <button className="btn d-flex align-items-centerr text-uppercase">
-                        <small>Description</small>
-                      </button>
-                    </th>
-                    <th scope="col">
-                      <button className="btn d-flex align-items-centerr text-uppercase">
-                        <small>Amount</small>
-                      </button>
-                    </th>
-                    <th scope="col">
-                      <button className="btn d-flex align-items-centerr text-uppercase">
-                        <small>Date</small>
-                      </button>
-                    </th>
-                  
-                  </tr>
-                </thead>
-                <tbody>
-                  {loading ? (
-                    <h1>Loading...</h1>
-                  ) : appErr || serverErr ? (
-                    <div>err</div>
-                  ) : expenseList?.docs?.length <= 0 ? (
-                    <h1>No Expense Found</h1>
-                  ) : (
-                    expenseList?.docs?.map(exp => (
-                      <>
-                        <ContentDetails key={exp?._id} item={exp} />
-                      </>
-                    ))
-                  )}
-                </tbody>
-              </table>
+        <div className="pal-3 bg-light" >
+          <div className="container-fluid " >
+            <div className="border border-0">
+                <h6 className="kal fs-2 text-secondary ">
+                  Recent Expense transactions
+                </h6>
+              <div className="tt">
+                <table className="table table-striped " >
+                  <thead>
+                    <tr>
+                      <th scope="col" >
+                        <strong className="btn  text-uppercase fw-bold text-light">
+                          Username
+                        </strong>
+                      </th>
+                      <th scope="col">
+                        <strong className="btn  text-uppercase fw-bold text-light">
+                          Title
+                        </strong>
+                      </th>
+                      <th scope="col">
+                        <strong className="btn  text-uppercase fw-bold text-light">
+                          Note
+                        </strong>
+                      </th>
+                      <th scope="col">
+                        <strong className="btn  text-uppercase fw-bold text-light">
+                          Amount
+                        </strong>
+                      </th>
+                      <th scope="col">
+                        <strong className="btn  text-uppercase fw-bold text-light">
+                          Date
+                        </strong>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody >
+                    {loading ? (
+                      <h1>Loading...</h1>
+                    ) : appErr || serverErr ? (
+                      <div>err</div>
+                    ) : expenseList?.docs?.length <= 0 ? (
+                      <h4 className="m-5" style={{ "font-size": "25px" }}>
+                        No Expense Found
+                      </h4>
+                    ) : (
+                      expenseList?.docs?.map((exp) => (
+                        <>
+                          <ContentDetails key={exp?._id} item={exp} />
+                        </>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
-         
           </div>
-          <div
+          <div className="pl"
             style={{
               display: "flex",
               alignItems: "center",
@@ -96,9 +97,7 @@ const ExpensesList = () => {
               pageNumber={expenseList?.totalPages}
             />
           </div>
-          </div>
-         
-        </section>
+        </div>
       )}
     </>
   );

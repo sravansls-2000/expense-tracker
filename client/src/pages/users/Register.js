@@ -6,7 +6,6 @@ import * as Yup from "yup";
 import { registerUserAction } from "../../redux/slices/users/usersSlices";
 import DisabledButton from "../../components/DisableButton";
  import './css/main.css'
- import './css/util.css'
 //form validations
 const formSchema = Yup.object({
   email: Yup.string().required("Email is required"),
@@ -42,6 +41,7 @@ const Register = () => {
   useEffect(() => {
     if (isRegistered) {
       history.push("/login");
+
     }
   }, [isRegistered]);
 
@@ -53,14 +53,14 @@ const Register = () => {
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
-        <h2 className="display-5 fw-bold mb-4 text-dark">
+        <h2 className="display-5 fw-bold mt-5 text-dark">
                 Keep Track of your income and expenses flow
               </h2>
 				</div>
 
 				<form class="login100-form validate-form" onSubmit={formik.handleSubmit}>
-        <span class="login100-form-title">
-					 user rigister
+        <span class="login100-title mt-4">
+					 User Registration
 					</span>
              {/* Display err here */}
              {userAppErr || userServerErr ? (
@@ -77,7 +77,7 @@ const Register = () => {
              class="input100"
              type="text"
               name="email"
-               placeholder=" firstname"/>
+               placeholder=" Firstname"/>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-user" aria-hidden="true"></i>
@@ -94,7 +94,7 @@ const Register = () => {
              class="input100" 
              type="lastname"
               name="pass"
-               placeholder="lastname"/>
+               placeholder="Lastname"/>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-user" aria-hidden="true"></i>
@@ -108,7 +108,7 @@ const Register = () => {
               value={formik.values.email}
               onChange={formik.handleChange("email")}
               onBlur={formik.handleBlur("email")}
-             class="input100" type="email" name="pass" placeholder="email"/>
+             class="input100" type="email" name="pass" placeholder="Email"/>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class=" fa fa-envelope" aria-hidden="true"></i>

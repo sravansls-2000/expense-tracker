@@ -3,12 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import LoadingComponent from "../../components/Loading";
 import ErrorDisplayMessage from "../../components/ErrorDisplayMessage";
 import { fetchAccountStatsAction } from "../../redux/slices/accountsStats/accountStatSlices";
-
-
-
+import '../../App.css'
 const DashboardData = () => {
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(fetchAccountStatsAction());
   }, [dispatch]);
@@ -25,130 +22,32 @@ const DashboardData = () => {
           {serverErr} {appErr}
         </ErrorDisplayMessage>
       ) : (
-        <section class="py-6">
+        <div class="pal-4">
           <div class="container">
-            {/* Grpah */}
-          
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                marginBottom: "20px",
-              }}
-            >
-            
-            </div>
-        
-            <div style={{ textAlign: "center", margin: "20px" }}>
-            
-            </div>
-            <div class="row">
-              <div class="col-12 col-md-6 mb-6">
-                <div class="p-8 border rounded-2">
-                  <div class="d-flex mb-6 align-items-start justify-content-between">
-                    <span
-                      class="d-inline-flex align-items-center justify-content-center bg-light-light rounded-2"
-                      style={{ width: "40px", height: "40px" }}
-                    ></span>
-                    {/* Expenses Start */}
-                    <span class="badge fs-2 bg-light text-danger">
-                      Total Expenses
-                    </span>
+            <div class="container-1 ">
+              <div class="card-2" >
+                <div class="content-1">
+                  <div class="contentBx mb-2">
+                    <h3>Total Income</h3>
                   </div>
-                  <h1 class="mb-4">Rs.
-                  {
-                      accountDetails?.expenseStats[0]?.totalExp
-                    }
-                  </h1>
-                  <p class="mb-0">
-                    <span>Number of Transactions</span>
-                    <span class="text-danger ms-1">
-                      <span>
-                        {accountDetails?.expenseStats[0]?.totalRecordsExp}
-                      </span>
-                    </span>
-                  </p>
-
-                  <p class="mb-0">
-                    <span>Minimum Transactions</span>
-                    <span class="text-danger ms-1">
-                      <span>{accountDetails?.expenseStats[0]?.minExp}</span>
-                    </span>
-                  </p>
-
-                  <p class="mb-0">
-                    <span>Maximum Transactions</span>
-                    <span class="text-danger ms-1">
-                      <span>{accountDetails?.expenseStats[0]?.maxExp}</span>
-                    </span>
-                  </p>
-
-                  <p class="mb-0">
-                    <span>Average Transactions</span>
-                    <span class="text-danger ms-1">
-                      <span>{accountDetails?.expenseStats[0]?.averageExp}</span>
-                    </span>
-                  </p>
+                  <div class="ll">Rs.{accountDetails?.expenseStats[0]?.totalExp}</div>
+                  <div class="ll-1">Total Transactions    {accountDetails?.expenseStats[0]?.totalRecordsExp}</div>
                 </div>
+                
               </div>
-              <div class="col-12 col-md-6 mb-6">
-                <div class="p-8 border rounded-2">
-                  <div class="d-flex mb-6 align-items-start justify-content-between">
-                    <span
-                      class="d-inline-flex align-items-center justify-content-center bg-danger-light rounded-2"
-                      style={{ width: "40px", height: "40px" }}
-                    ></span>
-
-                    {/* Income Start */}
-                    <span class="badge fs-2 bg-primary-light text-primary">
-                      Total Income
-                    </span>
+              <div></div>
+              <div class="card-2">
+                <div class="content-1">
+                  <div class="contentBx mb-2">
+                    <h3>Total Expenses</h3>
                   </div>
-                  <h1 class="mb-4">Rs
-                    {
-                      accountDetails?.incomeStats[0]?.totalIncome
-                    }
-                  </h1>
-
-                  <p class="mb-0">
-                    <span>Number of Transactions</span>
-                    <span class="text-danger ms-1">
-                      <span>
-                        {accountDetails?.incomeStats[0]?.totalRecordsIncome}
-                      </span>
-                    </span>
-                  </p>
-
-                  <p class="mb-0">
-                    <span>Minimum Transactions</span>
-                    <span class="text-danger ms-1">
-                      <span>
-                        {accountDetails?.incomeStats[0]?.totalRecordsIncome}
-                      </span>
-                    </span>
-                  </p>
-
-                  <p class="mb-0">
-                    <span>Maximum Transactions</span>
-                    <span class="text-danger ms-1">
-                      <span>{accountDetails?.incomeStats[0]?.maxIncome}</span>
-                    </span>
-                  </p>
-
-                  <p class="mb-0">
-                    <span>Average Transactions</span>
-                    <span class="text-danger ms-1">
-                      <span>
-                        {accountDetails?.incomeStats[0]?.averageIncome}
-                      </span>
-                    </span>
-                  </p>
+                  <div class="ll">Rs.{accountDetails?.incomeStats[0]?.totalIncome}</div>
+                  <div class="ll-1">Total Transactions {accountDetails?.incomeStats[0]?.totalRecordsIncome}</div>
                 </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
       )}
     </>
   );

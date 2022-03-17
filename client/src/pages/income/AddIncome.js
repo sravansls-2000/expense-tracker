@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { useHistory ,Link} from "react-router-dom";
-
+import '../../App.css'
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,7 +11,7 @@ import ErrorDisplayMessage from "../../components/ErrorDisplayMessage";
 //form validations
 const formSchema = Yup.object({
   title: Yup.string().required("title is required"),
-  description: Yup.string().required("description is required"),
+  note: Yup.string().required("note is required"),
   amount: Yup.number().required("income Amount is required"),
   date: Yup.date().required("Date is required")
 });
@@ -24,7 +24,7 @@ const AddIncome = () => {
   const formik = useFormik({
     initialValues: {
       title: "",
-      description: "",
+      note: "",
       amount: "",
       date:""
     },
@@ -44,14 +44,13 @@ const AddIncome = () => {
   }, [isIncCreated, dispatch]);
   return (
     <>
-      <section className="py-5 vh-100" style={{ "background": "#c4d3f6"}}>
+      <section className="pal" style={{ "background-color": "#c4d3f6"}}>
         <div className="container text-center">
           
           <div className="row mb-4">
             <div className="col-12 col-md-8 col-lg-5 mx-auto">
               <div className="p-4 shadow-sm rounded bg-white">
                 <form onSubmit={formik.handleSubmit}>
-                  <span className="text-muted">Income</span>
                   <h2 className="mb-4 fw-light">Record New Income</h2>
                   {/* Display income Err */}
                   {serverErr || appErr ? (
@@ -75,26 +74,12 @@ const AddIncome = () => {
                   </div>
                   <div className="mb-3 input-group">
                     <input
-                      value={formik.values.description}
-                      onChange={formik.handleChange("description")}
-                      onBlur={formik.handleBlur("description")}
-                      className="form-control"
-                      type="text"
-                      placeholder="Enter Description"
-                    />
-                  </div>
-                  {/* Err */}
-                  <div className="text-danger mb-2">
-                    {formik.touched.description && formik.errors.description}
-                  </div>
-                  <div className="mb-3 input-group">
-                    <input
                       value={formik.values.amount}
                       onChange={formik.handleChange("amount")}
                       onBlur={formik.handleBlur("amount")}
                       className="form-control"
                       type="number"
-                      placeholder="Enter  Income Amount"
+                      placeholder="Enter Income Amount"
                     />
                   </div>
                   {/* Err */}
@@ -115,6 +100,20 @@ const AddIncome = () => {
                   <div className="text-danger mb-2">
                     {formik.touched.date && formik.errors.date}
                   </div>
+                  <div className="mb-3 input-group">
+                    <input
+                      value={formik.values.note}
+                      onChange={formik.handleChange("note")}
+                      onBlur={formik.handleBlur("note")}
+                      className="form-control"
+                      type="text"
+                      placeholder="Enter note"
+                    />
+                  </div>
+                  {/* Err */}
+                  <div className="text-danger mb-2">
+                    {formik.touched.note && formik.errors.note}
+                  </div>
                   {loading ? (
                     <DisabledButton />
                   ) : (
@@ -124,7 +123,7 @@ const AddIncome = () => {
                   )}
 
                   <div>
-                    <h3 className="mb-4 fw-light">For Expense</h3>
+                    <h3 className="mb-2 fw-light">For Expense</h3>
                   <Link to="/add-expense" className="btn btn-warning me-2">
                 click here
               </Link>

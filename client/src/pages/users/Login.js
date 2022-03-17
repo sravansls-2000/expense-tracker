@@ -7,7 +7,6 @@ import { loginUserAction } from "../../redux/slices/users/usersSlices";
 import DisabledButton from "../../components/DisableButton";
 import { Link } from "react-router-dom";
 import './css/main.css';
-import './css/util.css'
 
 //form validations
 const formSchema = Yup.object({
@@ -49,26 +48,27 @@ const Login = () => {
 
   return (
     <>
-  <section>
-    <div className="limiter">
-		<div className="container-login100">
-			<div className="wrap-login100">
+  <section >
+    <div className="limiter" >
+		<div className="container-login100" >
+			<div className="wrap-login100 ">
 				<div className="login100-pic js-tilt" data-tilt>
         <span className="login100-form-title">
-        <h2 className="display-5 fw-bold mb-4 text-dark">
+        <h2 className="display-5 fw-bold mt-5 text-dark">
                 Keep Track of your income and expenses flow
               </h2>
-					</span>
+				</span>
 				</div>
+        
+				<form className="login100-form validate-form" onSubmit={formik.handleSubmit}>
+        <p className="mx-5">
         {userAppErr || userServerErr ? (
                 <div class="alert alert-danger" role="alert">
                   {userServerErr} {userAppErr}
                 </div>
               ) : null}
-
-				<form className="login100-form validate-form" onSubmit={formik.handleSubmit}>
-       
-					<span className="login100-form-title">
+          </p>
+					<span className="login100-title mt-5">
 						User Login
 					</span>
         
@@ -121,18 +121,13 @@ const Login = () => {
                       Login
                     </button>	</div>
                   )}
-					
-
-				
-				</form>
-        <div className="text-center p-t-136">
-						
-            <Link to="/register" className="btn btn-outline-warning me-2">
-                create account
-              </Link>
-							<i className="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-						
-					</div>
+                  <div className="mt-2" style={{"font-size":"17px"}}>Don't have an acount?
+                  <Link to="/register" className="text-decoration-none"style={{"color":"green"}}>
+                   <small>Create account</small> 
+                  </Link>
+					        </div>
+					</form>
+              
 			</div>
 		</div>
 	</div>

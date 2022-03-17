@@ -4,7 +4,6 @@ import EditContent from "./components/EditContent";
 import AdminRoute from "./components/Navigation/AdminRoute";
 import Navbar from "./components/Navigation/Navbar";
 import ProtectedRoute from "./components/Navigation/ProtectedRoute";
-import NotAdmin from "./components/NoteAdmin";
 import AddExpense from "./pages/expence/AddExpense";
 import ExpensesList from "./pages/expence/ExpenseList";
 import Home from "./pages/Home";
@@ -43,7 +42,6 @@ function App() {
           component={UserProfileIncList}
         />
         <AdminRoute exact path="/dashboard" component={DashboardData} />
-        <Route exact path="/not-found" component={NotAdmin} />
         <ProtectedRoute exact path="/add-income" component={AddIncome} />
         <ProtectedRoute exact path="/add-expense" component={AddExpense} />
         <ProtectedRoute exact path="/profile" component={Profile} />

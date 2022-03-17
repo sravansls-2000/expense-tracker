@@ -7,8 +7,8 @@ const incomeSchema = mongoose.Schema(
       required: [true, "Title  is required"],
       type: String,
     },
-    description: {
-      required: [true, "Description is required"],
+    note: {
+      required: [true, "note is required"],
       type: String,
     },
     type: {

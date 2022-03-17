@@ -1,74 +1,95 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector  } from "react-redux";
 import { logout } from "../../../redux/slices/users/usersSlices";
-
+import ex from "../../../img/exx.png"
+import '../../../App.css'
 const PrivateNavbar = () => {
   const dispatch = useDispatch();
   const userLogin = useSelector(state => state?.users?.userAuth);
 
   return (
     <>
-      <nav class="navbar navbar-expand-sm navbar navbar-dark">
-        <div class="container-fluid">
-          <Link to="/" className="navbar-brand">
-            <i class="bi bi-currency-exchange fs-1 text-warning "></i>
-          </Link>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-              { userLogin?.isAdmin ?
-                <Link to="/expenses" className="btn  btn-outline-warning me-2">
+      <nav
+        class="navbar navbar-expand-md navbar-dark  fixed-top p-1"
+        style={{ "background-color": "#5e5d96"}}
+      >
+        <Link to="/" className="navbar-brand">
+          <img className="image-fluid mx-5" src={ex} width="120" height="50" />
+        </Link>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-between"
+          id="navbarSupportedContent"
+        >
+          <ul class="navbar-nav ">
+            <li class="nav-item">
+              {userLogin?.isAdmin ? 
+                <Link
+                  to="/expenses"
+                  className="nav-link active text-light me-4"
+                >
                   Expenses List
-                </Link>:null}
-              </li>
+                </Link>
+               : null}
+            </li>
 
-              <li class="nav-item">
-              { userLogin?.isAdmin ?
-                <Link to="/incomes" className="btn  btn-outline-warning me-2">
+            <li class="nav-item ">
+              {userLogin?.isAdmin ? 
+                <Link to="/incomes" className="nav-link active text-light me-4">
                   Income List
-                </Link>:null}
-              </li>
+                </Link>
+              : null}
+            </li>
 
-              <li class="nav-item mb-2">
-                { userLogin?.isAdmin ?
-                <Link to="/dashboard" className="btn  btn-outline-warning me-2">
+            <li class="nav-item ">
+              {userLogin?.isAdmin ? 
+                <Link
+                  to="/dashboard"
+                  className="nav-link active text-light me-4"
+                >
                   Dashboard
-                </Link>:null}
-              </li>
-              <li class="nav-item">
-              { userLogin?.isAdmin ?null:
-                <Link to="/profile" className="btn  btn-outline-warning me-2" >
-                  profile 
-               </Link>}
-              </li>
+                </Link>
+               : null}
+            </li>
             </ul>
-            <form class="d-flex">
-           
-              { userLogin?.isAdmin ?null:
-              <Link to="/add-income" className="btn  btn-outline-warning me-2">
-                Add transaction
-              </Link>}
-              <button
+            <form class="form-inline d-flex al" style={{"text-align":"center"}}>
+            {userLogin?.isAdmin ? null:
+              <Link 
+                to="/profile" 
+                className="text-light text-decoration-none al-1"
+                style={{ "margin-right": "2em" }}
+                >
+                Profile
+              </Link>
+             }
+            {userLogin?.isAdmin ? null:
+              <Link
+                to="/add-income"
+                className="text-light text-decoration-none al-2" 
+                style={{ "margin-right": "2em" }}
+              >
+                Add Transaction
+              </Link>
+            }
+            <Link
                 onClick={() => dispatch(logout())}
-                className="btn  btn-outline-warning me-2"
+                className="text-light text-decoration-none"
+                style={{ "margin-right": "5em" }}
               >
                 Logout
-              </button>
-            </form>
-          </div>
+              </Link>
+          </form>
+              
+              
         </div>
       </nav>
     </>

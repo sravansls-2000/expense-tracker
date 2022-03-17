@@ -49,27 +49,13 @@ const UpdateProfile = ({ location: { state } }) => {
           {userServerErr} {userAppErr}
         </ErrorDisplayMessage>
       ) : (
-        <section className="py-5 bg-success vh-100">
+        <section className="pal-1 " style={{background:"#c4d3f6"}}>
           <div className="container text-center">
             <div className="row mb-4">
-              <div className="col-12 col-md-8 col-lg-5 mx-auto">
-                <div className="p-4 shadow-sm rounded bg-white">
+              <div className="col-12 col-md-10 col-lg-5 mx-auto">
+                <div className="p-5 shadow-sm  rounded bg-white">
                   <form onSubmit={formik.handleSubmit}>
-                    <span className="text-muted">Update Profile</span>
-                    {/* <h4 className="mb-4 fw-light">
-                    Hi, {data?.data?.firstname} Do you want to update your
-                    profile
-                  </h4> */}
-
-                    {/* Display income Err */}
-                    {/* {userAppErr || userServerErr ? (
-                    <ErrorDisplayMessage
-                      error={{
-                        userAppErr,
-                        userServerErr,
-                      }}
-                    />
-                  ) : null} */}
+                  <h3 className="mb-4 fw-light">Update Profile</h3>
                     <div className="mb-3 input-group">
                       <input
                         value={formik.values.firstname}

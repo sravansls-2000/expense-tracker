@@ -13,7 +13,7 @@ const AdminRoute = ({ component: Component, ...rest }) => {
         userLogin?.isAdmin ? (
           <Component {...rest} />
         ) : (
-          <Redirect to="/not-found" />
+          <Redirect to="/" />
         )
       }
     />
